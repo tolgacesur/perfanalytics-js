@@ -75,7 +75,7 @@ class PerfanalyticsInstance {
     }
 
     sendMetrics(metrics){
-        fetch(`${process.env.BASE_URL}/api/metrics`, {
+        fetch(`${process.env.API_BASE_URL}/api/metrics`, {
             method : 'post',
             body : JSON.stringify({token: this.token, metrics})
         })
