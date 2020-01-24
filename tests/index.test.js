@@ -1,4 +1,5 @@
 import Perfanalytics from '../src/index';
+
 require('jest-fetch-mock').enableMocks();
 
 let metrics;
@@ -18,7 +19,7 @@ describe('Should validate library initialization', () => {
         ['if configuration object is none', undefined, "Configuration parameter is required. Example : {token : 'XXXXXX'}"],
         ['if configuration object is empty', {token: ''}, "Token property of configuration object is required"]
     ])('Should throw console error %s', (text, config, error) => {
-        Perfanalytics(config).start();
+        Perfanalytics(config);
         expect(console.error).toBeCalled();
         expect(console.error.mock.calls[0])
             .toEqual(expect.arrayContaining(["Perfanalytics : ", error]));
@@ -29,6 +30,10 @@ describe('Should measure some performance metrics', () => {
 
     beforeEach(() => {
         jest.spyOn(global, 'window', 'get').mockImplementation(() => ({
+            addEventListener: jest.fn(),
+            location : {
+                href : 'test.com'
+            },
             performance: {
                 getEntriesByType : (type) => {
                     const entries = {
@@ -91,7 +96,7 @@ describe('Should make API call', () => {
     });
 
     test('Should correctly send metrics to API', () => {
-        Perfanalytics({token: 'test-token'}).sendMetrics({});
+        Perfanalytics({token: 'test-token'}).postMetrics({});
         expect(fetch.mock.calls.length).toEqual(1);
     });
 });

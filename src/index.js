@@ -2,6 +2,8 @@
 export default function Pefanalytics(config) {
     const instance = new PerfanalyticsInstance(config);
     instance.start();
+
+    return instance;
 }
 
 class PerfanalyticsInstance {
