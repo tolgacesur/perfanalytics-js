@@ -1,5 +1,7 @@
+// This is necessary to able to initialize library instance without new keyword
 export default function Pefanalytics(config) {
-    return new PerfanalyticsInstance(config);
+    const instance = new PerfanalyticsInstance(config);
+    instance.start();
 }
 
 class PerfanalyticsInstance {
@@ -18,7 +20,7 @@ class PerfanalyticsInstance {
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const metrics = this.getMetrics();
-                this.sendMetrics(metrics);
+                this.postMetrics(metrics);
             })
         }, false);
     }
@@ -74,10 +76,15 @@ class PerfanalyticsInstance {
         }
     }
 
-    sendMetrics(metrics){
+    // Post performance metrics with token and url address of current website
+    postMetrics(metrics){
         fetch(`${process.env.API_BASE_URL}/api/metrics`, {
             method : 'post',
-            body : JSON.stringify({token: this.token, metrics})
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body : JSON.stringify({token: this.token, metrics, url: window.location.href})
         })
         .then(() => {})
         .catch(() => {});
