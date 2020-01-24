@@ -1,7 +1,7 @@
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
 
-module.exports = () => ({
+module.exports = (env, arg) => ({
     entry: './src/index.js',
     output: {
         filename: 'perfanalytics.min.js',
@@ -12,7 +12,7 @@ module.exports = () => ({
     },
     plugins : [
         new Dotenv({
-            path: `./.env.${process.env.NODE_ENV === 'development' ? "dev" : "prod"}`,
+            path: `./.env.${arg.mode === 'development' ? "dev" : "prod"}`,
         })
     ],
     optimization: {
