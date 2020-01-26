@@ -48,7 +48,7 @@ class PerfanalyticsInstance {
         const windowLoadEvent = navigationEntry.loadEventEnd - navigationEntry.loadEventStart;
 
         // Get the timestamp when the paint ocurred
-        const fcp = firstContentfulPaintEntry ? firstContentfulPaintEntry.startTime : null;
+        const fcp = firstContentfulPaintEntry ? firstContentfulPaintEntry.startTime : 0;
 
         // Get list of network timings
         const resources = [];
