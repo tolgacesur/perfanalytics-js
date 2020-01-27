@@ -22,7 +22,7 @@ This is a client-side library, which collects some performance related key metri
 
 - Bundle size of library is **2,7 kB (2.671 bytes)**
 - This library measure timing of TTFB, FCP, Dom Load, Window Load events and Network resources
-- Written in **ES6**
+- Written using **ES6**
 - Used **webpack** and **babel**
 - Sends performance metrics to API with related `token` and `url`
 
