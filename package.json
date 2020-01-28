@@ -1,6 +1,6 @@
 {
   "name": "perfanalytics.js",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Client-side library of Perfanalytics",
   "scripts": {
     "dev": "webpack --watch --mode=development",
